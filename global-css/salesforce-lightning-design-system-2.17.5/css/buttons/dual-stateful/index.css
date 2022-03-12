@@ -1,0 +1,60 @@
+/*! Lightning Design System 2.17.5 */
+@charset "UTF-8";
+.slds-button_dual-stateful {
+}
+.slds-button_dual-stateful .slds-text-not-pressed {
+  display: block;
+}
+.slds-button_dual-stateful .slds-text-pressed {
+  display: none;
+}
+.slds-button_dual-stateful.slds-is-pressed {
+  padding-left: var(--slds-c-button-brand-spacing-inline-start, var(--sds-c-button-brand-spacing-inline-start, 1rem));
+  padding-right: var(--slds-c-button-brand-spacing-inline-end, var(--sds-c-button-brand-spacing-inline-end, 1rem));
+  text-align: center;
+  vertical-align: middle;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-transition: border 0.15s linear;
+  transition: border 0.15s linear;
+  /*! @css-var-fallback background-color */
+  --slds-c-button-color-background: var(
+    --slds-c-button-dual-stateful-color-background-selected,
+    var(--slds-c-button-brand-color-background, var(--sds-c-button-brand-color-background, #0176d3))
+  );
+  /*! @css-var-fallback border-color */
+  --slds-c-button-color-border: var(
+    --slds-c-button-dual-stateful-color-border-selected,
+    var(--slds-c-button-brand-color-border, var(--sds-c-button-brand-color-border, #0176d3))
+  );
+  /*! @css-var-fallback color */
+  --slds-c-button-text-color: var(
+    --slds-c-button-dual-stateful-text-color-selected,
+    var(--slds-c-button-brand-text-color, var(--sds-c-button-brand-text-color, white))
+  );
+}
+.slds-button_dual-stateful.slds-is-pressed:focus,
+.slds-button_dual-stateful.slds-is-pressed:hover {
+  /*! @css-var-fallback background-color */
+  --slds-c-button-dual-stateful-color-background-selected: var(
+    --slds-c-button-dual-stateful-color-background-selected-hover,
+    var(--slds-c-button-brand-color-background-hover, var(--sds-c-button-brand-color-background-hover, #014486))
+  );
+  /*! @css-var-fallback border-color */
+  --slds-c-button-dual-stateful-color-border-selected: var(
+    --slds-c-button-dual-stateful-color-border-selected-hover,
+    var(--slds-c-button-brand-color-border-hover, var(--sds-c-button-brand-color-border-hover, #014486))
+  );
+  /*! @css-var-fallback color */
+  --slds-c-button-dual-stateful-text-color-selected: var(
+    --slds-c-button-dual-stateful-text-color-selected-hover,
+    var(--slds-c-button-brand-text-color-hover, var(--sds-c-button-brand-text-color-hover, white))
+  );
+}
+.slds-button_dual-stateful.slds-is-pressed .slds-text-not-pressed {
+  display: none;
+}
+.slds-button_dual-stateful.slds-is-pressed .slds-text-pressed {
+  display: block;
+}

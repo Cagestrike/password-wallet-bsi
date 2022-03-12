@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Header from 'components/Header'
+import Image from 'next/image'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -32,7 +33,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Header />
 
       <main>
-        <div className="container">{children}</div>
+        <div className="container">
+            <div>
+                <h1 className="slds-text-heading_large slds-text-align--center slds-p-around--medium">Bezpieczeństwo systemów informatycznych<br/>Password wallet app</h1>
+            </div>
+            {children}
+        </div>
       </main>
     </>
   )

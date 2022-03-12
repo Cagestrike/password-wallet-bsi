@@ -1,0 +1,69 @@
+/*! Lightning Design System 2.17.5 */
+@charset "UTF-8";
+.slds-textarea {
+  -webkit-appearance: none;
+  min-height: var(--slds-c-textarea-sizing-min-height, var(--sds-c-textarea-sizing-min-height));
+  width: 100%;
+  padding-top: var(--slds-c-textarea-spacing-block-start, var(--sds-c-textarea-spacing-block-start, 0.5rem));
+  padding-right: var(--slds-c-textarea-spacing-inline-end, var(--sds-c-textarea-spacing-inline-end, 0.75rem));
+  padding-bottom: var(--slds-c-textarea-spacing-block-end, var(--sds-c-textarea-spacing-block-end, 0.5rem));
+  padding-left: var(--slds-c-textarea-spacing-inline-start, var(--sds-c-textarea-spacing-inline-start, 0.75rem));
+  background-color: var(--slds-c-textarea-color-background, var(--sds-c-textarea-color-background, white));
+  color: var(--slds-c-textarea-text-color, var(--sds-c-textarea-text-color));
+  border: 1px solid var(--slds-c-textarea-color-border, var(--sds-c-textarea-color-border, #c9c9c9));
+  border-radius: var(--slds-c-textarea-radius-border, var(--sds-c-textarea-radius-border, 0.25rem));
+  -webkit-box-shadow: var(--slds-c-textarea-shadow, var(--sds-c-textarea-shadow));
+  box-shadow: var(--slds-c-textarea-shadow, var(--sds-c-textarea-shadow));
+  resize: vertical;
+  -webkit-transition: border 0.1s linear, background-color 0.1s linear;
+  transition: border 0.1s linear, background-color 0.1s linear;
+}
+.slds-textarea:required {
+  /*! @css-var-fallback box-shadow */
+  --slds-c-textarea-shadow: none;
+}
+.slds-textarea:focus,
+.slds-textarea:active {
+  outline: 0;
+  color: var(--slds-c-textarea-text-color-focus, var(--sds-c-textarea-text-color-focus));
+  background-color: var(--slds-c-textarea-color-background-focus, var(--sds-c-textarea-color-background-focus, white));
+  border-color: var(--slds-c-textarea-color-border-focus, var(--sds-c-textarea-color-border-focus, #1b96ff));
+  -webkit-box-shadow: var(--slds-c-textarea-shadow-focus, var(--sds-c-textarea-shadow-focus, 0 0 3px #0176d3));
+  box-shadow: var(--slds-c-textarea-shadow-focus, var(--sds-c-textarea-shadow-focus, 0 0 3px #0176d3));
+}
+.slds-textarea[disabled],
+.slds-textarea.slds-is-disabled {
+  background-color: #f3f3f3;
+  border-color: #c9c9c9;
+  color: inherit;
+  cursor: not-allowed;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.slds-textarea[disabled]:focus,
+.slds-textarea[disabled]:active,
+.slds-textarea.slds-is-disabled:focus,
+.slds-textarea.slds-is-disabled:active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.slds-has-error .slds-textarea {
+  /*! @css-var-fallback background-color */
+  --slds-c-textarea-color-background: white;
+  /*! @css-var-fallback border-color */
+  --slds-c-textarea-color-border: #ea001e;
+  /*! @css-var-fallback box-shadow */
+  --slds-c-textarea-shadow: #ea001e 0 0 0 1px inset;
+  background-clip: padding-box;
+}
+.slds-has-error .slds-textarea:focus,
+.slds-has-error .slds-textarea:active {
+  --slds-c-textarea-text-color-focus: var(--slds-c-textarea-text-color-error-focus);
+  /*! @css-var-fallback background-color */
+  --slds-c-textarea-color-background-focus: var(--slds-c-textarea-color-background-error-focus, white);
+  /*! @css-var-fallback box-shadow */
+  --slds-c-textarea-shadow-focus: #ea001e 0 0 0 1px inset, 0 0 3px #0176d3;
+}

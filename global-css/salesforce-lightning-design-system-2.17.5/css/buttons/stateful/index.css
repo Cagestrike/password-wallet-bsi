@@ -1,0 +1,95 @@
+/*! Lightning Design System 2.17.5 */
+@charset "UTF-8";
+.slds-button_neutral.slds-is-selected {
+  /*! @css-var-fallback background-color */
+  --slds-c-button-neutral-color-background: var(--slds-c-button-stateful-color-background-selected, transparent);
+  /*! @css-var-fallback border-color */
+  --slds-c-button-neutral-color-border: var(--slds-c-button-stateful-color-border-selected, transparent);
+}
+.slds-button_neutral.slds-is-selected:hover:not([disabled]),
+.slds-button_neutral.slds-is-selected:focus:not([disabled]) {
+  /*! @css-var-fallback background-color */
+  --slds-c-button-neutral-color-background-hover: var(
+    --slds-c-button-stateful-color-background-selected-hover,
+    #f3f3f3
+  );
+  /*! @css-var-fallback border-color */
+  --slds-c-button-neutral-color-border-hover: var(--slds-c-button-stateful-color-border-selected-hover, #c9c9c9);
+}
+.slds-button_neutral.slds-is-selected:active:not([disabled]) {
+  /*! @css-var-fallback background-color */
+  --slds-c-button-neutral-color-background-active: var(
+    --slds-c-button-stateful-color-background-selected-active,
+    #f3f3f3
+  );
+}
+
+.slds-button_inverse.slds-is-selected {
+  border-color: transparent;
+}
+
+.slds-button_stateful .slds-text-selected,
+.slds-button_stateful .slds-text-selected-focus,
+.slds-button_stateful .slds-text-not-selected {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.slds-not-selected {
+}
+.slds-not-selected .slds-text-selected {
+  display: none;
+}
+.slds-not-selected .slds-text-selected-focus {
+  display: none;
+}
+.slds-not-selected .slds-text-not-selected {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.slds-is-selected-clicked .slds-text-selected,
+.slds-is-selected[disabled] .slds-text-selected,
+.slds-is-selected[disabled]:hover .slds-text-selected,
+.slds-is-selected[disabled]:focus .slds-text-selected {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.slds-is-selected-clicked .slds-text-selected-focus,
+.slds-is-selected[disabled] .slds-text-selected-focus,
+.slds-is-selected[disabled]:hover .slds-text-selected-focus,
+.slds-is-selected[disabled]:focus .slds-text-selected-focus {
+  display: none;
+}
+.slds-is-selected-clicked .slds-text-not-selected,
+.slds-is-selected[disabled] .slds-text-not-selected,
+.slds-is-selected[disabled]:hover .slds-text-not-selected,
+.slds-is-selected[disabled]:focus .slds-text-not-selected {
+  display: none;
+}
+.slds-is-selected .slds-text-not-selected {
+  display: none;
+}
+.slds-is-selected .slds-text-selected {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.slds-is-selected .slds-text-selected-focus {
+  display: none;
+}
+.slds-is-selected:hover .slds-text-not-selected,
+.slds-is-selected:focus .slds-text-not-selected {
+  display: none;
+}
+.slds-is-selected:hover .slds-text-selected,
+.slds-is-selected:focus .slds-text-selected {
+  display: none;
+}
+.slds-is-selected:hover .slds-text-selected-focus,
+.slds-is-selected:focus .slds-text-selected-focus {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
