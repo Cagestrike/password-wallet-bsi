@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from 'lib/prisma';
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from 'lib/session'
-import {calculateHMAC, calculateSha512, generateSalt} from "lib/cryptography";
+import {calculateHMAC, calculateMD5, calculateSha512, decrypt, encrypt, generateSalt} from "lib/cryptography";
 import {User} from "./user";
 
 export default withIronSessionApiRoute(handler, sessionOptions)
@@ -18,7 +18,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const user = req.session.user
         if (!user || !user.isLoggedIn) {
-            console.log('not logged in')
             res.status(401).json({message: 'Session expired.'})
             return;
         }
@@ -28,6 +27,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             return;
         }
         const current_user: any = current_users.at(0);
+        const old_password = current_user.password_hash;
         let new_password_encrypted = '';
         let new_salt = '';
         if (current_user.isPasswordKeptAsHash) {
@@ -47,7 +47,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         // @ts-ignore
         req.session.user?.salt = new_salt;
         await req.session.save()
-        res.status(200).json({message: 'Password changed successfully.'});
+
+        const passwords: any [] = await prisma.$queryRaw`
+                SELECT * FROM Password
+                WHERE id_user = ${user.id}
+            `;
+        for (const password of passwords) {
+            const decrypted = decrypt(password.password, calculateMD5(old_password));
+            const encrypted = encrypt(decrypted, calculateMD5(new_password_encrypted))
+            await prisma.$queryRaw`
+                UPDATE Password SET password = ${encrypted}
+                WHERE id = ${password.id}
+            `
+        }
+        res.status(200).json({message: 'Password changed successfully. Encrypted passwords updated successfully.'});
     } catch (e) {
         res.status(500).json({ message: (e as Error).message })
     }

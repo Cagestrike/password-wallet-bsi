@@ -20,9 +20,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 id: Number(passwordId)
             }
         })
-        console.log(walletEntry)
+
         if (walletEntry) {
-            // @ts-ignore
             const decryptedPassword = decrypt(walletEntry.password, calculateMD5(user.passwordHash));
             res.status(200).json({decryptedPassword});
             return

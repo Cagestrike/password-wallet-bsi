@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {FormEvent, useState} from 'react'
 import useUser from 'lib/useUser'
 import Layout from 'components/Layout'
 import LoginForm from 'components/LoginForm'
@@ -18,7 +18,7 @@ export default function Login() {
             <div className="login">
                 <LoginForm
                     errorMessage={errorMsg}
-                    onSubmit={async function handleSubmit(event) {
+                    onSubmit={async function handleSubmit(event: FormEvent<HTMLFormElement>) {
                         event.preventDefault()
                         setErrorMsg('')
                         const {login, password} = event.currentTarget;

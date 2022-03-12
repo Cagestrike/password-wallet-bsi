@@ -31,7 +31,6 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
             }
 
             if (passwordHash === user.password_hash) {
-                // @ts-ignore
                 const loggedInUser = {
                     id: user.id,
                     isLoggedIn: true,

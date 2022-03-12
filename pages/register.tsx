@@ -3,8 +3,6 @@ import useUser from 'lib/useUser'
 import Layout from 'components/Layout'
 import fetchJson, {FetchError} from 'lib/fetchJson'
 import RegisterForm from "components/RegisterForm";
-import {set} from "@octokit/auth-app/dist-types/cache";
-
 
 export default function Register() {
     // here we just check if user is already logged in and redirect to profile
@@ -49,7 +47,6 @@ export default function Register() {
                             setSuccessMessage(result.message)
                             // @ts-ignore
                             event.target.reset();
-                            console.log(event.target)
                         } catch (error) {
                             if (error instanceof FetchError) {
                                 setErrorMsg(error.data.message)

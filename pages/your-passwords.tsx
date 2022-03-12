@@ -11,7 +11,7 @@ import WalletEntry from "../components/WalletEntry";
 
 
 
-export default function YourPasswords({data}) {
+export default function YourPasswords({data} : {data: any}) {
     let {user} = useUser({
         redirectTo: '/login',
     })
@@ -76,7 +76,7 @@ export default function YourPasswords({data}) {
                                 onClick={(e) => handleShowAddPasswordModal(e)}>Add password
                         </button>
                     </div>
-                    {data.map((password) => (
+                    {data.map((password: any) => (
                         <WalletEntry password={password} />
                     ))}
                     <pre>{JSON.stringify(data, null, 2)}</pre>

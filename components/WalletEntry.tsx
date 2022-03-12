@@ -7,7 +7,7 @@ export default function WalletEntry({
     password: any,
 }) {
     const [isDecrypted, setIsDecrypted] = useState(false)
-    const [decryptedPassword, setDecryptedPassword] = useState(false)
+    const [decryptedPassword, setDecryptedPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
 
     const encrypt = () => {

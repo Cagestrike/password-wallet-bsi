@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "@prisma/client": "^3.10.0",
-    "@salesforce-ux/design-system": "^2.17.5",
     "iron-session": "latest",
     "next": "latest",
     "octokit": "^1.7.0",

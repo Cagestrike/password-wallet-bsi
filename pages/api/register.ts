@@ -4,6 +4,7 @@ import {calculateHMAC, calculateSha512, generateSalt} from "lib/cryptography";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { login, password, isPasswordKeptAsHash } = await req.body;
+
     try {
         const usersWithTheSameLogin: [] = await prisma.$queryRaw`SELECT id FROM User WHERE login = ${login}`;
         if (usersWithTheSameLogin.length) {

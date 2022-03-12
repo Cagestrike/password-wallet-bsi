@@ -1,20 +1,25 @@
-import React, {FormEvent, MouseEventHandler, useState} from 'react'
+import React, { useState} from 'react'
 import Layout from 'components/Layout'
 import useUser from 'lib/useUser'
 import Modal from "components/Modal";
 import Link from "next/link";
-import AddPasswordModal from "../components/AddPasswordModal";
-import fetchJson, {FetchError} from "../lib/fetchJson";
+import AddPasswordModal from "components/AddPasswordModal";
+import fetchJson, {FetchError} from "lib/fetchJson";
+import {useRouter} from "next/router";
 
 export default function SgProfile() {
     let {user} = useUser({
         redirectTo: '/login',
     })
+    const router = useRouter()
+    const refreshData = () => router.replace(router.asPath);
 
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false)
     const [showAddPasswordModal, setShowAddPasswordModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
+    const [isShowToast, setIsShowToast] = useState(false)
+    const [toastMessage, setToastMessage] = useState('')
 
     const handleShowChangePasswordModal = (e: React.MouseEvent<HTMLButtonElement>) => {
         setErrorMessage('')
@@ -22,7 +27,7 @@ export default function SgProfile() {
         setShowChangePasswordModal(true);
     }
 
-    const handleCloseChangePasswordModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleCloseChangePasswordModal = (e: React.MouseEvent<HTMLButtonElement> | null) => {
         setShowChangePasswordModal(false);
     }
 
@@ -34,6 +39,11 @@ export default function SgProfile() {
 
     const handleCloseAddPasswordModal = (e: React.MouseEvent<HTMLButtonElement>) => {
         setShowAddPasswordModal(false);
+    }
+
+    const showToast = (message: string) => {
+        setIsShowToast(true);
+        setToastMessage(message);
     }
 
     const handleAddPasswordSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,9 +64,12 @@ export default function SgProfile() {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(body),
             })
-            setSuccessMessage(result.message)
-            // @ts-ignore
-            e.target.reset();
+            setSuccessMessage(result.message);
+            showToast(result.message);
+            setTimeout(() => {
+                setIsShowToast(false);
+            }, 1000);
+            (e.target as HTMLFormElement).reset();
         } catch (error) {
             if (error instanceof FetchError) {
                 setErrorMessage(error.data.message)
@@ -82,9 +95,8 @@ export default function SgProfile() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(body),
                 })
-            setSuccessMessage(result.message)
-            // @ts-ignore
-            e.target.reset();
+            setSuccessMessage(result.message);
+            (e.target as HTMLFormElement).reset();
         } catch (error) {
             if (error instanceof FetchError) {
                 setErrorMessage(error.data.message)

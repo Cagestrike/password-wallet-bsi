@@ -1,5 +1,5 @@
 import React, {FormEvent, MouseEventHandler} from "react";
-import Modal from "./Modal";
+import Modal from "components/Modal";
 
 export default function AddPasswordModal({
                                              show,
@@ -59,7 +59,6 @@ export default function AddPasswordModal({
 
                 </Modal>
             </form>
-
         </>
     )
 }

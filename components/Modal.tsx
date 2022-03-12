@@ -12,7 +12,7 @@ export default function Modal({
             {show && (
                 <>
                     <section role="dialog" aria-labelledby="modal-heading-01" aria-modal="true"
-                             className="slds-modal slds-fade-in-open">
+                             className="slds-modal slds-fade-in-open modal">
                         <div className="slds-modal__container">
                             <button className="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
                                     onClick={handleClose}>
@@ -31,6 +31,12 @@ export default function Modal({
                     <div className="slds-backdrop slds-backdrop_open" role="presentation"/>
                 </>
             )}
+            <style jsx >{`
+                .modal {
+                z-index: 10000;
+                }
+              `}</style>
         </>
     )
+
 }

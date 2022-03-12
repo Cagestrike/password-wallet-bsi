@@ -15,6 +15,10 @@ export const calculateHMAC = (text: string, key: string): string => {
         .digest('hex')
 }
 
+export const generateSalt = () => {
+    return crypto.randomBytes(14).toString('base64');
+}
+
 export const encrypt = (data: string, key: string): string => {
     const cipher = crypto.createCipheriv('aes-128-cbc', Buffer.from(key, "hex"), Buffer.from(INITIALIZATION_VECTOR));
     return cipher.update(data, "utf8", "hex") + cipher.final("hex");
@@ -30,8 +34,4 @@ export const calculateMD5 = (text: string): string => {
         .createHash('MD5')
         .update(text, 'utf8')
         .digest('hex')
-}
-
-export const generateSalt = () => {
-    return crypto.randomBytes(14).toString('base64');
 }
