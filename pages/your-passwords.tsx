@@ -79,7 +79,7 @@ export default function YourPasswords({data} : {data: any}) {
                     {data.map((password: any) => (
                         <WalletEntry password={password} />
                     ))}
-                    <pre>{JSON.stringify(data, null, 2)}</pre>
+                    {/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
                 </>
             )}
             <AddPasswordModal show={showAddPasswordModal} handleClose={handleCloseAddPasswordModal}

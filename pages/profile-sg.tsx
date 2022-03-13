@@ -111,7 +111,7 @@ export default function SgProfile() {
             {user && (
                 <>
                     <h2 className="slds-text-heading--medium slds-text-align--center">Hello {user.login}!</h2>
-                    <pre>{JSON.stringify(user, null, 2)}</pre>
+                    {/*<pre>{JSON.stringify(user, null, 2)}</pre>*/}
                     <div className="slds-align_absolute-center">
                         <button className="slds-m-around_small slds-button slds-button_brand"
                                 onClick={(e) => handleShowChangePasswordModal(e)}>Change password
