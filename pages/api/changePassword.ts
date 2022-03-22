@@ -3,11 +3,10 @@ import { prisma } from 'lib/prisma';
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from 'lib/session'
 import {calculateHMAC, calculateMD5, calculateSha512, decrypt, encrypt, generateSalt} from "lib/cryptography";
-import {User} from "./user";
 
 export default withIronSessionApiRoute(handler, sessionOptions)
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function handler(req: NextApiRequest, res: NextApiResponse) {
     const {new_password, new_password_confirm} = await req.body;
 
     try {
@@ -42,10 +41,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             salt = ${new_salt}
         WHERE id = ${user.id} 
     `
-        // @ts-ignore
-        req.session.user?.passwordHash = new_password_encrypted;
-        // @ts-ignore
-        req.session.user?.salt = new_salt;
+        if (req.session.user) {
+            req.session.user.passwordHash = new_password_encrypted;
+            req.session.user.salt = new_salt;
+        }
+
         await req.session.save()
 
         const passwords: any [] = await prisma.$queryRaw`

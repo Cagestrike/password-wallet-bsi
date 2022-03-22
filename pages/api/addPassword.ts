@@ -6,7 +6,7 @@ import {calculateMD5, encrypt} from "lib/cryptography";
 
 export default withIronSessionApiRoute(handler, sessionOptions)
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function handler(req: NextApiRequest, res: NextApiResponse) {
     const {web_address, login, description, password} = await req.body;
 
     try {

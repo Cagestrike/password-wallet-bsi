@@ -70,7 +70,6 @@ export default function YourPasswords({data} : {data: any}) {
             {user && (
                 <>
                     <h2 className="slds-text-heading--medium slds-text-align--center">Your passwords</h2>
-                    {/*<pre>{JSON.stringify(user, null, 2)}</pre>*/}
                     <div className="slds-align_absolute-center">
                         <button className="slds-m-around_small slds-button slds-button_brand"
                                 onClick={(e) => handleShowAddPasswordModal(e)}>Add password
@@ -79,7 +78,6 @@ export default function YourPasswords({data} : {data: any}) {
                     {data.map((password: any) => (
                         <WalletEntry password={password} />
                     ))}
-                    {/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
                 </>
             )}
             <AddPasswordModal show={showAddPasswordModal} handleClose={handleCloseAddPasswordModal}

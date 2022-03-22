@@ -8,7 +8,7 @@ import {calculateHMAC, calculateSha512} from "lib/cryptography";
 
 export default withIronSessionApiRoute(loginRoute, sessionOptions)
 
-async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
+export async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     const {login, password} = await req.body
     try {
         const users: [] = await prisma.$queryRaw`
