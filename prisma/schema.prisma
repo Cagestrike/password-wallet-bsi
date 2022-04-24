@@ -11,20 +11,48 @@ datasource db {
 }
 
 model User {
-  id                   Int      @id @default(autoincrement())
-  login                String?  @unique
+  id                   Int            @id @default(autoincrement())
+  login                String?        @unique
   password_hash        String?
   salt                 String?
   isPasswordKeptAsHash Boolean?
-  Password Password[]
+  Password             Password[]
+  Function_Run         Function_Run[]
 }
 
 model Password {
-  id          Int     @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   password    String
   id_user     Int
-  User        User    @relation(fields: [id_user], references: [id])
+  User        User          @relation(fields: [id_user], references: [id])
   web_address String
   description String?
   login       String
+  Data_Change Data_Change[]
+}
+
+model Function {
+  id            Int            @id @default(autoincrement())
+  function_name String         @unique
+  description   String?
+  Function_Run  Function_Run[]
+}
+
+model Function_Run {
+  id          Int      @id @default(autoincrement())
+  id_user     Int
+  User        User     @relation(fields: [id_user], references: [id])
+  id_function Int
+  Function    Function @relation(fields: [id_function], references: [id])
+  timestamp   DateTime @default(now())
+}
+
+model Data_Change {
+  id                       Int      @id @default(autoincrement())
+  id_modified_record       Int
+  Password                 Password @relation(fields: [id_modified_record], references: [id])
+  previous_value_of_record String?
+  present_value_of_record  String
+  timestamp                DateTime @default(now())
+  action_type              String
 }

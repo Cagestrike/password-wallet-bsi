@@ -4,16 +4,23 @@ import {withIronSessionApiRoute} from 'iron-session/next'
 import {sessionOptions} from 'lib/session'
 import {NextApiRequest, NextApiResponse} from 'next'
 import {prisma} from "lib/prisma";
+import {Function, Prisma} from "@prisma/client";
 import {calculateHMAC, calculateSha512} from "lib/cryptography";
+import {log} from "util";
 
 export default withIronSessionApiRoute(loginRoute, sessionOptions)
 
 export async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     const {login, password} = await req.body
     try {
-        const users: [] = await prisma.$queryRaw`
+        console.log(`
                 SELECT id, login, password_hash, salt, isPasswordKeptAsHash
                 FROM User 
+                WHERE login = ${login}
+        `)
+        const users: [] = await prisma.$queryRaw`
+                SELECT id, login, password_hash, salt, isPasswordKeptAsHash
+                FROM User
                 WHERE login = ${login}
         `;
         if (!users.length) {
@@ -41,6 +48,17 @@ export async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
                 } as User
                 req.session.user = loggedInUser
                 await req.session.save()
+                const loginFunctionRecord: Function | null = await prisma.function.findUnique({
+                        where: {
+                            function_name: 'login'
+                        }
+                });
+                await prisma.function_Run.create({
+                    data: {
+                        id_function: loginFunctionRecord.id,
+                        id_user: loggedInUser.id
+                    }
+                });
                 res.status(200).json(loggedInUser)
             } else {
                 res.status(400).json({message: 'Wrong username or password.'});

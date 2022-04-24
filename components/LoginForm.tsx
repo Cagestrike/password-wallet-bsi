@@ -18,7 +18,7 @@ export default function LoginForm({
             <div className="slds-form-element slds-p-around--x-small">
                 <label className="slds-form-element__label" htmlFor="password-element">Password</label>
                 <div className="slds-form-element__control">
-                    <input type="password" id="password-element" name="password" required className="slds-input"/>
+                    <input type="text" id="password-element" name="password" required className="slds-input"/>
                 </div>
             </div>
 

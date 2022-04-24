@@ -105,6 +105,17 @@ export const getServerSideProps = withIronSessionSsr(async function ({
                 SELECT * FROM Password
                 WHERE id_user = ${user.id}
             `
+        const passwordFunctionRecord: Function | null = await prisma.function.findUnique({
+            where: {
+                function_name: 'your-passwords'
+            }
+        });
+        await prisma.function_Run.create({
+            data: {
+                id_function: passwordFunctionRecord.id,
+                id_user: user.id
+            }
+        });
         return {
             props: {data: passwords},
         }

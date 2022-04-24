@@ -20,13 +20,13 @@ export default function RegisterForm({
             <div className="slds-form-element slds-p-around--x-small">
                 <label className="slds-form-element__label" htmlFor="password-element">Password</label>
                 <div className="slds-form-element__control">
-                    <input type="password" id="password-element" name="password" required className="slds-input"/>
+                    <input type="text" id="password-element" name="password" required className="slds-input"/>
                 </div>
             </div>
             <div className="slds-form-element slds-p-around--x-small">
                 <label className="slds-form-element__label" htmlFor="password-confirm-element">Confirm password</label>
                 <div className="slds-form-element__control">
-                    <input type="password" id="password-confirm-element" name="password_confirm" required className="slds-input"/>
+                    <input type="text" id="password-confirm-element" name="password_confirm" required className="slds-input"/>
                 </div>
             </div>
             <div className="slds-form-element slds-p-around--x-small">

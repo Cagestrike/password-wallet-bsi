@@ -14,30 +14,37 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
             res.status(401).json({message: 'Session expired.'})
             return
         }
+
         const {passwordId} = req.query;
+        const {new_password} = await req.body;
+
         const walletEntry = await prisma.password.findUnique({
             where: {
                 id: Number(passwordId)
             }
         })
 
-        const decryptFunctionRecord: Function | null = await prisma.function.findUnique({
+        const encryptedPassword = encrypt(new_password, calculateMD5(user.passwordHash));
+
+        const updatedPassword = await prisma.password.update({
             where: {
-                function_name: 'decryptPassword'
-            }
-        });
-        await prisma.function_Run.create({
+                id: +passwordId
+            },
             data: {
-                id_function: decryptFunctionRecord.id,
-                id_user: user.id
+                password: encryptedPassword
             }
         });
-        if (walletEntry) {
-            const decryptedPassword = decrypt(walletEntry.password, calculateMD5(user.passwordHash));
-            res.status(200).json({decryptedPassword});
-            return
-        }
-        res.status(404).json({message: 'Password not found'});
+
+        await prisma.data_Change.create({
+            data: {
+                id_modified_record: +passwordId,
+                previous_value_of_record: walletEntry.password,
+                present_value_of_record: updatedPassword.password,
+                action_type: 'UPDATE'
+            }
+        })
+
+        res.status(200).json({updatedPassword, message: 'Password updated successfully'});
     } catch (e) {
         res.status(500).json({ message: (e as Error).message })
     }

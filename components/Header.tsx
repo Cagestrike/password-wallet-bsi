@@ -79,6 +79,13 @@ export default function Header() {
                                 </Link>
                             </li>
                             <li className="slds-context-bar__item">
+                                <Link href="/taken-actions">
+                                    <a className="slds-context-bar__label-action">
+                                        <span className="slds-truncate">Taken actions</span>
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="slds-context-bar__item">
                                 <a className="slds-context-bar__label-action" href="/api/logout"
                                    onClick={async (e) => {
                                        e.preventDefault()

@@ -60,6 +60,17 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
                 WHERE id = ${password.id}
             `
         }
+        const changePasswordFunctionRecord: Function | null = await prisma.function.findUnique({
+            where: {
+                function_name: 'changePassword'
+            }
+        });
+        await prisma.function_Run.create({
+            data: {
+                id_function: changePasswordFunctionRecord.id,
+                id_user: user.id
+            }
+        });
         res.status(200).json({message: 'Password changed successfully. Encrypted passwords updated successfully.'});
     } catch (e) {
         res.status(500).json({ message: (e as Error).message })

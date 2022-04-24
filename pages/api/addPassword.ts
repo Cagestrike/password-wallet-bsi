@@ -23,6 +23,17 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
             INSERT INTO Password (password, id_user, web_address, description, login)
             VALUES (${encryptedPassword}, ${user.id}, ${web_address}, ${description}, ${login})
         `
+        const addPasswordFunctionRecord: Function | null = await prisma.function.findUnique({
+            where: {
+                function_name: 'addPassword'
+            }
+        });
+        await prisma.function_Run.create({
+            data: {
+                id_function: addPasswordFunctionRecord.id,
+                id_user: user.id
+            }
+        });
             res.status(200).json({message: 'Credentials added successfully'});
     } catch (e) {
         res.status(500).json({ message: (e as Error).message })
